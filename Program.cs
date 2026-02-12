@@ -30,9 +30,7 @@ namespace LetterboxdWatchlistRandomMovieSelector
                 Console.WriteLine($"Randomly selected movie: {randomMovie}");
 
                 string movieName = randomMovie.Replace(" ", "-").ToLower();
-                Console.WriteLine(movieName);
                 
-                Console.WriteLine(movieYear);
                 Console.WriteLine($"Torrent Link: https://yts.bz/movies/{movieName}-{movieYear}");
             }
 
