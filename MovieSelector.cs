@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Spectre.Console;
 
 namespace LetterboxdWatchlistRandomMovieSelector
 {
@@ -15,6 +16,7 @@ namespace LetterboxdWatchlistRandomMovieSelector
         // Constructor to read the CSV file and populate the movies dictionary
         public MovieSelector()
         {
+            // users currrently have to copy the path of the csv file from their downloads folder and paste it here
             using (var reader = new StreamReader(@"C:\\Users\\mihir\\Downloads\\watchlist-fortnutmastr006-2026-02-15-16-24-utc.csv"))
             {
                 var values = new string[4];
@@ -28,6 +30,35 @@ namespace LetterboxdWatchlistRandomMovieSelector
             }
         }
 
+
+        // Method to create cool ascii heading
+        public void createAsciiHeading()
+        {
+            // Clear console for fresh display
+            AnsiConsole.Clear();
+
+            // Big fancy title
+            AnsiConsole.Write(new FigletText("MOVIE RANDOMIZER")
+                .Centered()
+                .Color(Color.White));
+
+            AnsiConsole.WriteLine();
+        }
+
+        // Method to draw a line with letterboxd logo emojis
+        public void drawLine()
+        {
+            AnsiConsole.Write(new Rule
+            {
+                Border = BoxBorder.Rounded, 
+                Justification = Justify.Left, 
+                Style = Style.Parse("SteelBlue"),
+                Title = "\ud83d\udfe0\ud83d\udfe2\ud83d\udd35"
+            });
+
+            Console.WriteLine();
+        }
+
         // Method to generate a random movie and print its torrent link
         public void generateRandomMovie()
         {
@@ -39,9 +70,10 @@ namespace LetterboxdWatchlistRandomMovieSelector
             string movieName = randomMovie.Replace(" ", "-").ToLower();
 
             // Print the randomly selected movie and its torrent link
-            Console.WriteLine($"Randomly selected movie: {randomMovie}");
+            drawLine();
+            AnsiConsole.MarkupLine($"Randomly selected movie: [Green]{randomMovie}[/]");
 
-            Console.WriteLine($"Torrent Link: https://yts.bz/movies/{movieName}-{movieYear}");
+            AnsiConsole.MarkupLine($"Torrent Link: [Blue]https://yts.bz/movies/{movieName}-{movieYear}[/]");
         }
     }
 }
